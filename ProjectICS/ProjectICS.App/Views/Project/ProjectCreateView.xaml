@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ProjectICS.App.Views"
+             xmlns:vm ="clr-namespace:ProjectICS.App.ViewModels"
+             xmlns:models="clr-namespace:ProjectICS.BL.Models;assembly=ProjectICS.BL"
+             x:DataType="vm:ProjectCreateViewModel"
+             x:Class="ProjectICS.App.Views.Project.ProjectCreateView"
+             x:Name="ProjectCreateViewRoot">
+
+    <VerticalStackLayout Margin="20">
+        <Grid>
+            <HorizontalStackLayout>
+                <Label Text="Pick activity:"
+                       FontSize="30"
+                       VerticalOptions="Center"
+                       Margin="0,0,20,60"/>
+
+                <Picker Grid.Column="1"
+                    ItemsSource="{Binding Activities}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedIndex="0"
+                    SelectedItem="{Binding SelectedActivity}"/>
+            </HorizontalStackLayout>
+            
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="40">
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="Create new project"
+                       Margin="0,0,0,30"
+                       FontSize="30"/>
+                <Frame HeightRequest="250"
+                       CornerRadius="20"
+                       BorderColor="Gray">
+                    <VerticalStackLayout>
+                        <Label Text="Project name:"
+                               FontSize="20"
+                               Grid.Row="0"
+                               Margin="0,0,0,10"
+                               TextColor="White"/>  
+                        <Entry Text="{Binding Project.Name}"
+                               Grid.Row="1"/>
+                        <Button Text="Create Project"
+                                Grid.Row="2"
+                                TextColor="White"
+                                Margin="0,20,0,0"
+                                WidthRequest="150"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Green"
+                                Command="{Binding SaveProjectCommand}"/>
+                    </VerticalStackLayout>
+                    
+                </Frame>
+                
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1">
+                <Label Text="Enroll to existing project"
+                       Margin="0,0,0,30"
+                       FontSize="30"/>
+                <Frame HeightRequest="250"
+                       BorderColor="Gray"
+                       CornerRadius="20">
+                    <VerticalStackLayout>
+                        <Label Text="Pick project:"
+                               FontSize="20"
+                                Margin="0,0,0,10"/>
+                        <Picker ItemsSource="{Binding Projects}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedIndex="0"
+                                SelectedItem="{Binding SelectedProjectListModel}"/>
+
+
+                        <Button Text="Enroll in"
+                                BackgroundColor="ForestGreen"
+                                WidthRequest="150"
+                                TextColor="White"
+                                Margin="0,20,0,0"
+                                HorizontalOptions="Center"
+                                Command="{Binding JoinProjectCommand}"/>
+
+                    </VerticalStackLayout>
+                </Frame>
+                
+                
+            </VerticalStackLayout>
+        </Grid>
+        
+        
+    </VerticalStackLayout>
+
+</views:ContentPageBase>

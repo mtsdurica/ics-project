@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:views="clr-namespace:ProjectICS.App.Views"
+                     xmlns:vm ="clr-namespace:ProjectICS.App.ViewModels"
+                     x:Class="ProjectICS.App.Views.Activity.ActivityCreateView"
+                     x:DataType="vm:ActivityCreateViewModel">
+
+    <VerticalStackLayout Margin="20">
+        <Label Text="{Binding User.Name}"
+               FontSize="20"
+               VerticalOptions="Center"/>
+        <Label Text="Activity name"
+               FontSize="14"
+               Margin="0,20,0,0"/>
+        <Entry Text="{Binding Activity.Name}"/>
+        <Label Text="Activity type"
+               FontSize="14"
+               Margin="0,20,0,0"/>
+        <Entry Text="{Binding Activity.Type}"/>
+        <Label Text="Activity description"
+               FontSize="14"
+               Margin="0,20,0,0"/>
+        <Entry Text="{Binding Activity.Description}"/>
+
+        
+        <Grid RowDefinitions="Auto, Auto"
+              Margin="0,20,0,0"
+              HorizontalOptions="Center">
+            <Grid ColumnDefinitions="Auto,Auto">
+                <Grid Grid.Column="0"
+                      Margin="0,0,60,0">
+                    <VerticalStackLayout>
+                        <Label Text="Activity start"/>
+                        <TimePicker Time="{Binding StartTempTime}" Format="HH:mm" />
+                    </VerticalStackLayout>
+                    
+                </Grid>
+                
+                <Grid Grid.Column="1">
+                    <VerticalStackLayout>
+                        <Label Text="Activity end"/>
+                        <TimePicker Time="{Binding EndTempTime}" Format="HH:mm" />
+                    </VerticalStackLayout> 
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1"
+                  HorizontalOptions="Center">
+                <VerticalStackLayout>
+                    <Label Text="Activity date"></Label>
+                    <DatePicker Date="{Binding Activity.StartTime}" Format="YYYY-MM-DD"/>
+                </VerticalStackLayout>
+
+            </Grid>
+        </Grid>
+        <Button Text="Save activity"
+                    FontSize="14"
+                    Margin="0,50"
+                    HorizontalOptions="Center"
+                    BackgroundColor="ForestGreen"
+                    TextColor="White"
+                    Command="{Binding SaveCommand}"
+                    />
+    </VerticalStackLayout>
+    
+</views:ContentPageBase>

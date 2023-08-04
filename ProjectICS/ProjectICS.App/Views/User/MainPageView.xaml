@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ProjectICS.App.Views"
+             xmlns:m ="clr-namespace:ProjectICS.BL.Models;assembly=ProjectICS.BL"
+             xmlns:vm ="clr-namespace:ProjectICS.App.ViewModels"
+             x:Class="ProjectICS.App.Views.User.MainPageView"
+             x:DataType="vm:MainPageViewModel"
+             x:Name="MainPageViewRoot">
+
+    <Grid RowDefinitions="Auto,*"
+          Margin="20">
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,Auto"
+              Margin="20, 0">
+            <CollectionView Grid.Column="0"
+                            VerticalOptions="Center"
+                            ItemsSource="{Binding Users}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal"
+                                     HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:UserListModel">
+                        <Frame IsClippedToBounds="True"
+                               CornerRadius="20"
+                               WidthRequest="200"
+                               HeightRequest="300"
+                               BorderColor="Black">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference MainPageViewRoot}, Path=BindingContext.GoToUserCommand}"
+                                                      CommandParameter="{Binding Id}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+
+                            <Grid>
+                                <Image Grid.Row="0"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Fill"
+                                       Aspect="AspectFill"
+                                       
+                                       WidthRequest="200" HeightRequest="300"
+                                       Source="{Binding PictureLink, TargetNullValue='user_pic_placeholder.jpg'}" />
+                                
+                                <Frame Grid.Row="0"
+                                       Padding="0,10"
+                                       Margin="5"
+                                       CornerRadius="10"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End"
+                                       WidthRequest="150"
+                                       BorderColor="Black"
+                                       BackgroundColor="Black">
+                                    
+                                    <VerticalStackLayout HorizontalOptions="Center"
+                                                         VerticalOptions="Center">
+                                        
+                                        <Label FontSize="12"
+                                               Text="{Binding Name}"
+                                               TextColor="White"/>
+
+                                        <Label FontSize="12"
+                                               Text="{Binding Surname}"
+                                               TextColor="white"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <Button Grid.Column="1"
+                    VerticalOptions="Center"
+                    Text="Add User"
+                    TextColor="white"
+                    FontSize="14"
+                    Margin="50,0,0,0"
+                    BackgroundColor="ForestGreen"
+                    Command="{Binding GoToCreateCommand}"/>
+        </Grid>
+    </Grid>
+
+</views:ContentPageBase>

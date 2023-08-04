@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:u="clr-namespace:ProjectICS.App.Views.User"
+    xmlns:app="clr-namespace:ProjectICS.App"
+    x:Class="ProjectICS.App.Shells.AppShell"
+    x:Name="AppShellRoot"
+    FlyoutBehavior="Disabled">
+
+    <Shell.MenuBarItems>
+        <MenuBarItem Text="Menu">
+            <MenuFlyoutItem Text="Refresh"  Command="{Binding Source={x:Reference AppShellRoot}, Path=RefreshCommand}"/>
+            <MenuFlyoutItem Text="Help" Command="{Binding Source={x:Reference AppShellRoot}, Path=ShowHelpPopUpCommand}"/>
+            <MenuFlyoutItem Text="About" Command="{Binding Source={x:Reference AppShellRoot}, Path=ShowAboutPopUpCommand}"/>
+            <MenuFlyoutItem Text="Quit app" Command="{Binding Source={x:Reference AppShellRoot}, Path=ExitApplicationCommand}"/>
+        </MenuBarItem>
+    </Shell.MenuBarItems>
+    <ShellContent Title="Activity Planner" ContentTemplate="{DataTemplate u:MainPageView}"
+        Route="users" />
+
+</Shell>

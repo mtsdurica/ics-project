@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ProjectICS.App.Views"
+                       xmlns:m ="clr-namespace:ProjectICS.BL.Models;assembly=ProjectICS.BL"
+                       xmlns:vm="clr-namespace:ProjectICS.App.ViewModels"
+                       x:Class="ProjectICS.App.Views.User.UserMainPageView"
+                       x:DataType="vm:UserMainPageViewModel"
+                       x:Name="UserMainPageViewRoot">
+
+    <Grid RowDefinitions="Auto, Auto, *"
+          Margin="20">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,*">
+            <Label Grid.Column="0" Text="{Binding User.Name}"
+                   FontSize="25"
+                   VerticalOptions="Center"/>
+            <HorizontalStackLayout Grid.Column="1"
+                                   HorizontalOptions="End" >
+                <Button
+                    Text="Log out"
+                    TextColor="white"
+                    Margin="10,0,0,0"
+                    BackgroundColor="Blue"
+                    FontSize="14"
+                    Command="{Binding LogOutCommand}"/>
+                <Button 
+                    Text="Profile"
+                    TextColor="white"
+                    Margin="10,0,0,0"
+                    BackgroundColor="ForestGreen"
+                    FontSize="14"
+                    Command="{Binding GoToEditUserCommand}"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="1"
+                               Margin="0,20"
+                               HorizontalOptions="Center">
+
+            <Label  Text="Filter"
+                        FontSize="20"
+                        Margin="30,0"
+                        VerticalOptions="Center"/>
+            <Picker TextColor="WhiteSmoke"
+                        Title="By order"
+                        FontSize="15"
+                        ItemsSource="{Binding secondFilteringOption}"
+                        SelectedItem="{Binding SelectedSecondFilteringOption}"
+                        WidthRequest="200"
+                        HorizontalOptions="CenterAndExpand"/>
+            <Picker TextColor="WhiteSmoke"
+                        Title="By date"
+                        FontSize="15"
+                        WidthRequest="200"
+                        Margin="20,0,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        ItemsSource="{Binding firstFilteringOption}"
+                        SelectedItem="{Binding SelectedFirstFilteringOption}"/>
+            <Button Grid.Column="0"
+                    Text="Apply"
+                    TextColor="white"
+                    Margin="50,0,0,0"
+                    BackgroundColor="transparent"
+                    BorderColor="White"
+                    FontSize="14"
+                    Command="{Binding ApplyFilterCommand}"/>
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="2"
+            ColumnDefinitions="*,*">
+            <VerticalStackLayout Grid.Column="0">
+                <Grid ColumnDefinitions="*,*">
+                    <HorizontalStackLayout Margin="0,0,0,20"
+                                           Grid.Column="0">
+                        <Label  Text="Activities"
+                        FontSize="30"/>
+                        <Label  Text="{Binding User.UserActivities.Count}"
+                        FontSize="30"
+                        Margin="30,0"
+                        VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <Button Grid.Column="1"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Text="+"
+                            TextColor="Black"
+                            FontSize="14"
+                            Margin="0,0,150,0"
+                            BackgroundColor="WhiteSmoke"
+                            Command="{Binding GoToCreateActivityCommand}"/>
+                </Grid>
+
+                <ScrollView HeightRequest="450">
+                    <CollectionView 
+                            ItemsSource="{Binding UserActivities}">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:ActivityListModel">
+                                <Frame IsClippedToBounds="True"
+                                       CornerRadius="20"
+                                       WidthRequest="300"
+                                       HeightRequest="90"
+                                       Margin="10"
+                                       BackgroundColor="LightBlue"
+                                       BorderColor="Black">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserMainPageViewRoot}, Path=BindingContext.GoToActivityCommand}"
+                                                      CommandParameter="{Binding Id}"/>
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid>
+                                        <Frame Grid.Row="0"
+                                           Padding="0,10"
+                                           Margin="5"
+                                           CornerRadius="10"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           WidthRequest="250"
+                                           BorderColor="Black"
+                                           BackgroundColor="black">
+
+                                            <VerticalStackLayout HorizontalOptions="Center"
+                                                         VerticalOptions="Center">
+
+                                                <Label FontSize="12"
+                                               Text="{Binding Name}"
+                                               TextColor="White"/>
+
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1">
+                <Grid ColumnDefinitions="*,*">
+                    <HorizontalStackLayout Margin="0,0,0,20">
+                        <Label 
+                   Text="Projects"
+                   FontSize="30"/>
+
+                        <Label  Grid.Column="2" 
+                        Text="{Binding User.UserProjects.Count}"
+                        FontSize="30"
+                        Margin="30,0"
+                        VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Button Grid.Column="1"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            Text="+"
+                            TextColor="Black"
+                            FontSize="14"
+                            Margin="50,0,150,0"
+                            BackgroundColor="WhiteSmoke"
+                            Command="{Binding GoToCreateProjectCommand}"/>
+
+                </Grid>
+                <ScrollView HeightRequest="450">
+                    <CollectionView 
+                            ItemsSource="{Binding User.UserProjects}">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:ProjectListModel">
+                                <Frame IsClippedToBounds="True"
+                                       CornerRadius="20"
+                                        WidthRequest="300"
+                                        HeightRequest="90"
+                                        Margin="10"
+                                       BorderColor="Black"
+                                       BackgroundColor="LightGreen">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserMainPageViewRoot}, Path=BindingContext.GoToProjectCommand}"
+                                                      CommandParameter="{Binding Id}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid>
+                                        <Frame Grid.Row="0"
+                                               Padding="0,10"
+                                               Margin="5"
+                                               CornerRadius="10"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               WidthRequest="250"
+                                               BorderColor="Black"
+                                               BackgroundColor="Black">
+
+                                            <VerticalStackLayout HorizontalOptions="Center"
+                                                         VerticalOptions="Center">
+
+                                                <Label FontSize="12"
+                                               Text="{Binding Name}"
+                                               TextColor="White"/>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+
+
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</views:ContentPageBase>
+

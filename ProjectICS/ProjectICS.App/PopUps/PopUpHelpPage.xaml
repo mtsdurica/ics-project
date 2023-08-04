@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="ProjectICS.App.PopUps.PopUpHelpPage">
+    <Grid RowDefinitions="*"
+          BackgroundColor="Black">
+        <Frame BorderColor="White">
+            <VerticalStackLayout>
+                <Label Text="Help"
+                   FontSize="25"/>
+                <Label Text="This desktop applicaton allows you to create profile and manage your activities and projects."
+                       Margin="0,5"/>
+                <Label Text="Create activity and enroll to existing project or create your own."
+                       Margin="0,5"/>
+                <Label Text="Edit your profile picture, name and surname or edit your activities and projects."
+                       Margin="0,5"/>
+                
+            </VerticalStackLayout>
+            
+        </Frame>
+    </Grid>
+</mct:Popup>

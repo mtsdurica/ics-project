@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ProjectICS.App.Views"
+             xmlns:vm="clr-namespace:ProjectICS.App.ViewModels"
+             x:DataType="vm:UserProfileViewModel"
+             x:Class="ProjectICS.App.Views.User.UserProfileView">
+
+    <Grid ColumnDefinitions="*,*"
+          RowDefinitions="auto,*"
+          Margin="20">
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Text="Delete account"
+                BackgroundColor="Red"
+                TextColor="White"
+                HorizontalOptions="End"
+                Margin="0,10"
+                Command="{Binding DeleteUserCommand}"/>
+
+        <Frame Grid.Column="0"
+               Grid.Row="1"
+               IsClippedToBounds="True"
+               CornerRadius="20"
+               WidthRequest="200"
+               HeightRequest="300"
+               BorderColor="Black">
+
+            <Grid>
+                <Image Grid.Row="0"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       Aspect="AspectFill"
+                                       
+                       WidthRequest="200" HeightRequest="300"
+                       Source="{Binding User.PictureLink, TargetNullValue='user_pic_placeholder.jpg'}" />
+
+            </Grid>
+        </Frame>
+        <StackLayout Grid.Column="1"
+                     Grid.Row="1"
+                     VerticalOptions="Center"
+                     Orientation="Vertical"
+                     Spacing="10">
+            <Label Text="Name" />
+            <Entry Text="{Binding User.Name}"/>
+            <Label Text="Surname"/>
+            <Entry Text="{Binding User.Surname}"/>
+            <Label Text="Picture"/>
+            <Entry Text="{Binding User.PictureLink}"/>
+
+            <Button Text="Save changes"
+                    FontSize="14"
+                    Margin="0,10"
+                    HorizontalOptions="Center"
+                    BackgroundColor="ForestGreen"
+                    TextColor="White"
+                    Command="{Binding SaveCommand}"/>
+        </StackLayout>
+    </Grid>
+</views:ContentPageBase>

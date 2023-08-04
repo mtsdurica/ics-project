@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+        <ProjectReference Include="..\ProjectICS.DAL\ProjectICS.DAL.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Facades\Interfaces\" />
+	  <Folder Include="Mappers\Interfaces\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" PrivateAssets="All"/>
+	  <PackageReference Include="Scrutor" Version="4.2.2" />
+	</ItemGroup>
+</Project>
